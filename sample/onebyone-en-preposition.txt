@@ -1,0 +1,10 @@
+at:Mike arrived [?] the theater. マイクは[劇場に(一点)]着いた
+in:I happened to see Cindy [?] the theater. [劇場の中で(場所の内部)]たまたまシンディーに会った
+about:a book for children [?] animals. 子供向けの[動物に関する(一般的な主題)]本
+on: Don't depend [?] others. [他人に(依存)]頼るな
+in:Sally graduated from college [?] 1995. サリーは [1995 年に]大学を卒業した
+from:Butter is made [?] milk. バターは[牛乳から(原料)]作られている
+for:The train has already left [?] Hakata. その列車はすでに[博多へ向けて(方向)]出発した
+in:He learned how to use a computer [?] three weeks. 彼はコンピュータの使い方を [3 週間で]覚えた
+of:Every member [?] the club attended the ceremony. [部員全員が(所属)]、その式典に出席した
+by:The man standing [?] Jane is Scott. ジェーンの[隣に(近接)]立っているあの男がスコットだ
