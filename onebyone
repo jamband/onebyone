@@ -1,0 +1,97 @@
+#!/usr/bin/env ruby
+
+# usage
+def usage
+  print <<-EOS
+Command usage:
+  #{File.basename(__FILE__)} <path/to/file_name>
+
+Range specification:
+  :20     1 - 20 line
+  10:     10 - last line
+  10:20   10 - 20 line
+          1 - last line
+
+Operation:
+  "s" key is skipped
+  "q" key is quit
+
+Example contents:
+  answer:question
+  answer1|answer2|answer3:question
+EOS
+  exit 1
+end
+
+# check the file and more
+if ARGV.empty?
+  warn "Please enter the file."
+  exit 1
+end
+
+usage if /\A(-h|--help|help)\z/ =~ ARGV.first.strip
+
+unless File.file?(ARGV.first.strip)
+  warn "No such file."
+  exit 1
+end
+
+# init
+CONTENTS = open(ARGV.first.strip).readlines.map(&:chomp).reject(&:empty?)
+START_TIME = Time.now
+KEY_SKIP = /\A(s|ｓ)\z/
+KEY_QUIT = /\A(q|ｑ)\z/
+WAIT_TIME_CORRECT = 1
+WAIT_TIME_INCORRECT = 2
+
+count = {correct: 0, incorrect: 0}
+redo_line = 0
+again = false
+
+# check the range specification
+print "Please enter the range (1 ~ #{CONTENTS.size}): "
+input = $stdin.gets.strip.split(":", 2).map(&:to_i)
+
+case input.size
+when 0
+  line_range = 1..CONTENTS.size
+when 1
+  warn "Invalid range has been specified."
+  exit 1
+else
+  first = input.first.zero? || input.first > CONTENTS.size ? 1 : input.first
+  last = input.last.zero? || input.last > CONTENTS.size ? CONTENTS.size : input.last
+  line_range = first..last
+end
+
+# start
+loop do
+  system("clear")
+  puts "time: #{(Time.now - START_TIME).to_i / 60} min correct: #{count[:correct]} incorrect: #{count[:incorrect]}"
+
+  current_line = again ? redo_line : Random.rand(line_range) - 1
+  answer, question = CONTENTS[current_line].split(":", 2)
+  again = false
+
+  print "#{question}: "
+  input = $stdin.gets.strip
+
+  next if KEY_SKIP =~ input
+  break if KEY_QUIT =~ input
+
+  answers = answer.split("|")
+  if answers.any? { |v| v.casecmp(input) == 0 }
+    count[:correct] += 1
+    puts "\e[32mcorrect.\e[0m"
+    sleep WAIT_TIME_CORRECT
+  else
+    count[:incorrect] += 1
+    again = true
+    redo_line = current_line
+    puts "\e[31mincorrect.\e[0m >> #{answers.join(' / ')}"
+    sleep WAIT_TIME_INCORRECT
+  end
+end
+
+# done
+exit 0
