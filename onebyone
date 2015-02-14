@@ -41,8 +41,8 @@ CONTENTS = open(ARGV.first.strip).readlines.map(&:chomp).reject(&:empty?)
 START_TIME = Time.now
 KEY_SKIP = /\A(s|ｓ)\z/
 KEY_QUIT = /\A(q|ｑ)\z/
-WAIT_TIME_CORRECT = 1
-WAIT_TIME_INCORRECT = 2
+WAIT_TIME_CORRECT = 0.8
+WAIT_TIME_INCORRECT = 2.0
 
 count = {correct: 0, incorrect: 0}
 redo_line = 0
