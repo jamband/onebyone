@@ -1,10 +1,10 @@
 brain disorder:脳障害
 diagnose:診断する
 antisocial:反社会的な
-roam:歩きまわる、ぶらつく、放浪する
+roam:歩きまわる|ぶらつく|放浪する
 gather|collect:集める
 the southern hemisphere:南半球
 colleague|coworker:同僚
-find out:見つける、知る
-figure out:理解する、解決する
+find out:見つける|知る
+figure out:理解する|解決する
 around here:この辺に
